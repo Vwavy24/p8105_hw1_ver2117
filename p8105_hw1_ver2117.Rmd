@@ -4,4 +4,47 @@ author: "Varvy Rousseau"
 date: "2022-09-20"
 output: github_document
 ---
+```{r}
+# Problem 1
+
+data("penguins", package = "palmerpenguins")
+summary(penguins)
+
+mean(penguins$bill_length_mm, na.rm = TRUE)
+
+
+```
+
+The data contains the species of penguins, the island where they are from and their bill depth, length, flipper length, sex, and the year
+
+The species(Adelie, Chinstrap, Gentoo) found in the penguins dataset is `r penguins$species`
+
+The islands(Biscoe, Dream, Torgersen) found in the penguins dataset is `r penguins$island`
+
+The mean(43.92mm) of bill length in mm found in the penguins dataset is `r mean(penguins$ bill_length_mm, na.rm = TRUE)`
+
+The mean(17.15mm) of bill depth in mm found in the penguins dataset is `r mean(penguins$ bill_depth_mm, na.rm = TRUE)`
+
+The mean(200.9 mm) of flipper length in mm found in the penguins dataset is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`
+
+The mean(4202 g) of body mass of the penguins dataset is `r mean(penguins$body_mass_g, na.rm = TRUE)`
+
+The number of rows in the penguins dataset is `r nrow(penguins)`
+The number of columns in the penguins dataset is `r ncol(penguins)`
+
+```{r}
+library(ggplot2)
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm)) +
+  geom_point(aes(color = species))
+
+ggsave("Rplot.png")
+
+```
+
+
+## Problem 2
+
+
+
+
 
