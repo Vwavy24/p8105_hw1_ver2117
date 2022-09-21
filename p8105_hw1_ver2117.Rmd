@@ -1,0 +1,6 @@
+---
+title: "p8105_hw1_ver2117"
+author: "Varvy Rousseau"
+date: "2022-09-20"
+output: html_document
+---
