@@ -4,30 +4,42 @@ author: "Varvy Rousseau"
 date: "2022-09-20"
 output: github_document
 ---
+
+```{r}
+#Loading in relevant packages for project
+library(tidyverse)
+```
+
+
+
 ```{r}
 # Problem 1
-
+#Used this code to download the data set penguins
 data("penguins", package = "palmerpenguins")
+
+#Getting a summary of descriptive statistics of variables 
 summary(penguins)
 
-mean(penguins$bill_length_mm, na.rm = TRUE)
 
+#Getting the mean using the pull function to pull the variable out of the dataframe; this is for the mean of bill length of penguins
+
+mean(pull(penguins, bill_length_mm), na.rm = TRUE)
 
 ```
 
 The data contains the species of penguins, the island where they are from and their bill depth, length, flipper length, sex, and the year
 
-The species(Adelie, Chinstrap, Gentoo) found in the penguins dataset is `r penguins$species`
+The species(Adelie, Chinstrap, Gentoo) found in the penguins dataset is `r pull(penguins, species)`
 
-The islands(Biscoe, Dream, Torgersen) found in the penguins dataset is `r penguins$island`
+The islands(Biscoe, Dream, Torgersen) found in the penguins dataset is `r pull(penguins, island)`
 
-The mean(43.92mm) of bill length in mm found in the penguins dataset is `r mean(penguins$ bill_length_mm, na.rm = TRUE)`
+The mean(43.92mm) of bill length in mm found in the penguins dataset is `r mean(pull(penguins, bill_length_mm), na.rm = TRUE)`
 
-The mean(17.15mm) of bill depth in mm found in the penguins dataset is `r mean(penguins$ bill_depth_mm, na.rm = TRUE)`
+The mean(17.15mm) of bill depth in mm found in the penguins dataset is `r mean(pull(penguins, bill_depth_mm), na.rm = TRUE)`
 
-The mean(200.9 mm) of flipper length in mm found in the penguins dataset is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`
+The mean(200.9 mm) of flipper length in mm found in the penguins dataset is `r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)`
 
-The mean(4202 g) of body mass of the penguins dataset is `r mean(penguins$body_mass_g, na.rm = TRUE)`
+The mean(4202 g) of body mass of the penguins dataset is `r mean(pull(penguins, body_mass_g), na.rm = TRUE)`
 
 The number of rows in the penguins dataset is `r nrow(penguins)`
 The number of columns in the penguins dataset is `r ncol(penguins)`
@@ -43,6 +55,58 @@ ggsave("Rplot.png")
 
 
 ## Problem 2
+
+```{r}
+prob2_df= tibble(
+  r_sample = rnorm(10),
+  vec_logical = r_sample > 0,
+  vec_char = c("z", "y", "x", "w", "v", "u", "t", "s", "r","q"),
+  vec_factor = factor(c("large", "medium","small", "large", "medium", "small", "large", "medium", "small", "large"), levels = c("small", "medium", "large"))
+  )
+
+```
+
+
+
+```{r}
+
+# finding the mean of my data frame that I created using the mean and pull function of each variable
+
+mean(pull(prob2_df, r_sample))
+
+mean(pull(prob2_df, vec_logical))
+
+mean(pull(prob2_df, vec_char))
+
+mean(pull(prob2_df, vec_factor))
+
+```
+
+When trying to take the mean of each variable in my data frame, the mean of the random sample is computed as `r mean(pull(prob2_df, r_sample))`
+
+The mean of the logical vector is computed as `mean(pull(prob2_df, vec_logical))`
+
+The character vector cannot be computed as `mean(pull(prob2_df, vec_char))`
+
+The factor vector cannot be computed as `mean(pull(prob2_df, vec_factor))`
+
+```{r}
+#converting the logical, character and factor vector into numbers using the as.numeric function
+as.numeric(pull(prob2_df, r_sample))
+
+as.numeric(pull(prob2_df, vec_logical))
+
+as.numeric(pull(prob2_df, vec_char))
+
+as.numeric(pull(prob2_df, vec_factor))
+
+```
+
+After using `as.numeric(pull(prob2_df, vec_logical))`for the logical vector the value of 0) is assigned to False and the value of 1 is assigned to True. This allows us to interpret the logical vector in a proportional sense.   
+
+When using the `as.numeric(pull(prob2_df, vec_char))`for the character vector it converts the values to NA because it is not a logical or numeric variabe which is the same for mean. It helps us show that this is true. 
+
+I also used `as.numeric(pull(prob2_df, vec_factor))`for the factor variable and it converted the levels into numbers 1,2, or 3 after I assigned these levels a specific order. Previously, before I tried to take the mean of the factor variable, R gave me a warning because the differences between large and medium or large and small could not be defined. So when I change the factor variable and levels to numbers, now I can compute the mean. 
 
 
 
